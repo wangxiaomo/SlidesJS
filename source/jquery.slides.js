@@ -453,12 +453,16 @@
     if (!this.data.animating && number !== this.data.current + 1) {
       $.data(this, "animating", true);
       currentSlide = this.data.current;
+      number = number - 1;
       if (number > -1) {
-        number = number - 1;
         value = number > currentSlide ? 1 : -1;
         direction = number > currentSlide ? -this.options.width : this.options.width;
         next = number;
       } else {
+        number = currentSlide + 1;
+        if (number === this.data.total) {
+          number = 0;
+        }
         value = this.data.direction === "next" ? 1 : -1;
         direction = this.data.direction === "next" ? -this.options.width : this.options.width;
         next = currentSlide + value;
@@ -483,7 +487,7 @@
         left: value * this.options.width,
         zIndex: 10
       });
-      this.options.callback.start(currentSlide + 1);
+      this.options.callback.start(number);
       if (this.data.vendorPrefix) {
         prefix = this.data.vendorPrefix;
         transform = prefix + "Transform";
@@ -543,11 +547,15 @@
     if (!this.data.animating && number !== this.data.current + 1) {
       $.data(this, "animating", true);
       currentSlide = this.data.current;
-      if (number) {
-        number = number - 1;
+      number = number - 1;
+      if (number > -1) {
         value = number > currentSlide ? 1 : -1;
         next = number;
       } else {
+        number = currentSlide + 1;
+        if (number === this.data.total) {
+          number = 0;
+        }
         value = this.data.direction === "next" ? 1 : -1;
         next = currentSlide + value;
       }
@@ -564,7 +572,7 @@
         left: 0,
         zIndex: 10
       });
-      this.options.callback.start(currentSlide + 1);
+      this.options.callback.start(number);
       if (this.options.effect.fade.crossfade) {
         slidesControl.children(":eq(" + this.data.current + ")").stop().fadeOut(this.options.effect.fade.speed);
         return slidesControl.children(":eq(" + next + ")").stop().fadeIn(this.options.effect.fade.speed, (function() {
