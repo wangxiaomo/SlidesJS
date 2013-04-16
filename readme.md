@@ -31,3 +31,5 @@ $(function(){
   });
 });
 ```
+
+- [x] when clicking the pagination, callbacks will be in a confusion.

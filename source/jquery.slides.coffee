@@ -575,12 +575,15 @@
       # Get current slide
       currentSlide = @data.current
 
+      number = number - 1
       if number > -1
-        number = number - 1
         value = if number > currentSlide then 1 else -1
         direction = if number > currentSlide then -@options.width else @options.width
         next = number
       else
+        number = currentSlide + 1
+        if number == @data.total
+          number = 0
         value = if @data.direction is "next" then 1 else -1
         direction = if @data.direction is "next" then -@options.width else @options.width
         next = currentSlide + value
@@ -612,7 +615,7 @@
         zIndex: 10
 
       # Start the slide animation
-      @options.callback.start(currentSlide + 1)
+      @options.callback.start(number)
 
       if @data.vendorPrefix
         # If supported use CSS3 for the animation
@@ -690,19 +693,21 @@
 
     # Check if not currently animating and the selected slide is not the current slide
     if not @data.animating and number isnt @data.current + 1
-
       # Set animating to true
       $.data this, "animating", true
 
       # Get current slide
       currentSlide = @data.current
 
-      if number
+      number = number - 1
+      if number > -1
         # Specific slide has been called
-        number = number - 1
         value = if number > currentSlide then 1 else -1
         next = number
       else
+        number = currentSlide + 1
+        if number == @data.total
+          number = 0
         # Next/prev slide has been called
         value = if @data.direction is "next" then 1 else -1
         next = currentSlide + value
@@ -726,7 +731,7 @@
         zIndex: 10
 
       # Start of the animation, call the start callback
-      @options.callback.start(currentSlide + 1)
+      @options.callback.start(number)
 
       if @options.effect.fade.crossfade
         # Fade out current slide to next slide

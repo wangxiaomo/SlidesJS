@@ -22,9 +22,17 @@
   </div>
   <script>
   $(function(){
+    var rgb_backgrounds = new Array(
+    '#2f578b',
+    '#488abe',
+    '#018ec3',
+    '#03393b',
+    '#f0f7fd'
+    );
+
     $('.slides').slidesjs({
       width: 950,
-      height: 328,
+      height: 380,
       play: {
         auto: true,
         active: true,
@@ -47,12 +55,16 @@
             if(trans_n === total){
               trans_n = 0;
             }
-            return trans_n+1;
+            return trans_n;
           };
-          console.log(trans(number, 5));
+          $('.slides_wrapper').css('background-color', rgb_backgrounds[trans(number, rgb_backgrounds.length)]);
         }
       }
     });
+
+    (function render(){
+      $('.slides_wrapper').css('background-color', rgb_backgrounds[0]);
+    })();
   });
   </script>
 </body>
