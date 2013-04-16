@@ -50,6 +50,8 @@
         # You cannot use your own pagination.
       effect: "slide"
         # [string] Can be either "slide" or "fade".
+      autoResume: false
+        # [boolean] auto resume or not when clicking the pagination
     play:
         # Play and stop button setting.
       active: false
@@ -253,7 +255,10 @@
         paginationLink.click (e) =>
           e.preventDefault()
           # Stop play
-          @stop(true)
+          if @options.pagination.autoResume
+            @play(true)
+          else
+            @stop(true)
           # Goto to selected slide
           @goto( ($(e.currentTarget).attr("data-slidesjs-item") * 1) + 1 )
       )

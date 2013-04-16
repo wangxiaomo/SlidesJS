@@ -15,3 +15,19 @@ Features
 2. Touch
 3. CSS3 Transitions
 4. Easy Setup
+
+Bugs
+----------------
+
+- [x] when autoplaying, your event of clicking will stop the looping
+
+```javascript
+$(function(){
+  $('#slides').slidesjs({
+    navigation: {
+      active: true,
+      autoResume: true // auto resume or not when clicking the pagination
+    }
+  });
+});
+```

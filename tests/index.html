@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>SlidesJS</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet/less" type="text/css" href="static/less/main.less">
+  <script src="static/js/less-1.3.3.min.js"></script>
+  <script src="static/js/jquery-1.9.1.min.js"></script>
+  <script src="static/js/jquery.slides.js"></script>
+</head>
+<body>
+  <div class="page_container">
+    <div class="slides_wrapper">
+      <div class="slides">
+        <img src="static/img/banner11.jpg" alt="" />
+        <img src="static/img/banner12.jpg" alt="" />
+        <img src="static/img/banner13.jpg" alt="" />
+        <img src="static/img/banner14.jpg" alt="" />
+        <img src="static/img/banner15.jpg" alt="" />
+      </div>
+    </div>
+  </div>
+  <script>
+  $(function(){
+    $('.slides').slidesjs({
+      width: 950,
+      height: 328,
+      play: {
+        auto: true,
+        active: true,
+        effect: 'fade',
+        interval: 3000,
+        pauseOnHover: true,
+        restartDelay: 1000
+      },
+      navigation: {
+        effect: 'fade'
+      },
+      pagination: {
+        effect: 'fade',
+        autoResume: true
+      },
+      callback: {
+        start: function(number){
+          var trans = function(n, total){
+            var trans_n = n;
+            if(trans_n === total){
+              trans_n = 0;
+            }
+            return trans_n+1;
+          };
+          console.log(trans(number, 5));
+        }
+      }
+    });
+  });
+  </script>
+</body>
+</html>
